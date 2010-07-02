@@ -7,7 +7,7 @@ var FormChecker = function (options, callas) {
 				2.override - if set to true then will override 
 							any fields that the root object has.
 	*/
-	var merge = function (options) {
+	var	merge = function (options) {
 		var temp,
 		root = options.objects[0],
 		objects = options.objects,
@@ -81,20 +81,17 @@ var FormChecker = function (options, callas) {
 		key,
 		field;
 		for (key in fieldset) {
-			each(fieldset, function () {
-				
-			})
-		}
-		/*for (key in fieldset) {
 			if (fieldset.hasOwnProperty(key)) {
-				for (i = 0; i < fieldset[key].length; i += 1) {
-					console.log(checkObject[key]);
-					if (!checkObject[key].call(that, fetch_field(fieldset[key][i]).value)) {
-						runCallback(fetch_field.cache[fieldset[key][i]]);
+				each(fieldset[key], function (e) {
+					field = fetch_field(e);
+					if (!checkObject[key].call(that, field.value)) {
+						runCallback(field);
+					} else {
+						field.className = "";
 					}
-				}
+				});
 			}
-		}*/
+		}
 	},
 	each = function (that , fn) {
 		var key;

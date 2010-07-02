@@ -7,7 +7,7 @@ var FormChecker = function (options, callas) {
 				2.override - if set to true then will override 
 							any fields that the root object has.
 	*/
-	var	merge = function (options) {
+	var merge = function (options) {
 		var temp,
 		root = options.objects[0],
 		objects = options.objects,

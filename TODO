@@ -1,0 +1,5 @@
+TODO: 
+
+
+1. Make FormChecker do the event handling of the object.
+2. FormChecker .check() method return true if there are no rottenFields at all.

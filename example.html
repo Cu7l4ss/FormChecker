@@ -5,22 +5,40 @@
 	.error {
 		border: 1px solid red;
 	}
+	.error:after {
+		content: "*";
+	}
 </style>
 <script type="text/javascript" src="FormChecker.js"></script>
 <script type="text/javascript">
 	var s = new FormChecker({
 		fieldset: {
 			"phone" : ["phone"],
-			"email": ["email"],
-			"isEmpty": ["ss"]
+			"email": ["email", "email2"],
+			"isIdentical": ["email", "email2","ss"]
 			},
 		checks: {
-			"isEmpty" : function (o) {
-							if(typeof o === "string")
-								if(o !== "")
-									return true;
-							return false;
-						}
+			"isEmpty" : function (els) {
+							var rottenFields = [];
+							this.each(els, function (field) {
+								if(typeof field.value === "string")
+									if(field.value === "")
+										rottenFields.push(field);
+							});
+							return rottenFields;
+						},
+			"isIdentical" : function (els) {
+								var rottenFields = [],
+								tempEl = els[0],
+								i=0,
+								length = els.length;
+								for (; i<length; i+=1) {
+									if (tempEl.value != els[i].value) {
+										rottenFields.push(els[i]);
+									}
+								}
+								return rottenFields;
+							}
 		}
 	}, "error");
 	window.onload = function () {
@@ -42,6 +60,7 @@
 <form id="asd" action="" method="post">
 	<input type="text" id="phone" />
 	<input type="text" id="email" />
+	<input type="text" id="email2" />
 	<input type="text" id="ss" />
 	<input type="submit" />
 </form>

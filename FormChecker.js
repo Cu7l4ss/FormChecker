@@ -55,6 +55,11 @@ var FormChecker = function (options, callas) {
 		} else {
 			return function (el) {
 				el.className += " " + callas;
+				el.onfocus = function () {
+					this.value = "";
+					el.className = "";
+					this.onfocus = "";
+				};
 			};
 		}
 	}()),
@@ -86,8 +91,6 @@ var FormChecker = function (options, callas) {
 					field = fetch_field(e);
 					if (!checkObject[key].call(that, field.value)) {
 						runCallback(field);
-					} else {
-						field.className = "";
 					}
 				});
 			}

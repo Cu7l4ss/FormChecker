@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>asd</title>
+<style>
+	.error {
+		border: 1px solid red;
+	}
+</style>
+<script type="text/javascript" src="FormChecker.js"></script>
+<script type="text/javascript">
+	var s = new FormChecker({
+		fieldset: {
+			"phone" : ["phone"],
+			"email": ["email"],
+			"isEmpty": ["ss"]
+			},
+		checks: {
+			"isEmpty" : function (o) {
+							if(typeof o === "string")
+								if(o !== "")
+									return true;
+							return false;
+						}
+		}
+	}, "error");
+	window.onload = function () {
+		var form = document.getElementById("asd");
+		form.onsubmit = function (e) {
+			e.stopBubble = true;
+			e.returnValue = false;
+			if (e.stopPropagation) {
+				e.stopPropagation();
+				e.preventDefault();
+			}
+			s.check();
+		};
+	};
+</script>
+</head>
+
+<body>
+<form id="asd" action="" method="post">
+	<input type="text" id="phone" />
+	<input type="text" id="email" />
+	<input type="text" id="ss" />
+	<input type="submit" />
+</form>
+</body>
+</html>
